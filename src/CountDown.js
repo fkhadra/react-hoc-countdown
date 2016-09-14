@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { isDateValid, extractProps } from './utils';
 
-export default function (options) {
-  return (ClientComponent) => class extends Component {
+export default (ClientComponent) => class extends Component {
 
     static propTypes = {
       end(props, propName, component) {
@@ -76,5 +75,4 @@ export default function (options) {
     render() {
       return <ClientComponent remaining={this.state} {...extractProps(this)} />
     }
-  }
 }
