@@ -4,13 +4,13 @@ function isDate(value) {
 }
 
 export function isDateValid(date) {
-  return isDate(date) && isNaN(date.getTime());
+  return isDate(date) && !isNaN(date.getTime());
 }
 
-export function extractProps(component) {
+export function removeProps(component, propsToRemove) {
   const props = {};
   Object.keys(component.props).forEach(key => {
-    if (!{}.hasOwnProperty.call(component.defaultProps, key)) {
+    if (! {}.hasOwnProperty.call(propsToRemove, key)) {
       props[key] = component.props[key];
     }
   });

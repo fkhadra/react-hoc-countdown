@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isDateValid, extractProps } from './utils';
+import { isDateValid, removeProps } from './utils';
 
 export default (ClientComponent) => class extends Component {
 
@@ -22,13 +22,14 @@ export default (ClientComponent) => class extends Component {
       updateInterval: 1000
     };
 
-    constructor() {
+    constructor(props) {
+      super(props);
         this.play = this.play.bind(this);
         this.stop = this.stop.bind(this);
-        this.updateTime = this.updateTime.bind(this);
+        this.countDown = this.countDown.bind(this);
         this.intervalId = null;
 
-        this.state = this.formatTime(this.props.end.getTime());
+        this.state = this.formatTime(this.getElapsedTime());
       }
 
     formatTime(time){
@@ -73,6 +74,6 @@ export default (ClientComponent) => class extends Component {
     }
 
     render() {
-      return <ClientComponent remaining={this.state} {...extractProps(this)} />
+      return <ClientComponent remaining={this.state} {...(this, this.defaultProps)} />
     }
 }
